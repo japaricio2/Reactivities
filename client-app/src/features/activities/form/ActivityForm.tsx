@@ -5,7 +5,6 @@ import { Button, Form, Segment } from 'semantic-ui-react';
 import LoadingComponents from '../../../app/layout/LoadingComponents';
 import { useStore } from '../../../app/stores/store';
 import {v4 as uuid} from 'uuid';
-import { getuid } from 'process';
 
 
 
