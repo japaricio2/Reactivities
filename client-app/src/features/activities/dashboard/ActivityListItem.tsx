@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { Button, Icon, Item, Segment } from 'semantic-ui-react';
 import { Activity } from '../../../app/models/activity';
@@ -19,7 +20,7 @@ export default function ActivityListItem({ activity }: Props) {
                     <Item>
                         <Item.Image size='tiny' circular src='/assets/user.png' />
                         <Item.Content>
-                            <Item.Header as={Link} to={`/activitites/${activity.id}`}>
+                            <Item.Header as={Link} to={`/activities/${activity.id}`}>
                                 {activity.title}
                             </Item.Header>
                             <Item.Description>Hosted by Hank Hill</Item.Description>
@@ -29,7 +30,7 @@ export default function ActivityListItem({ activity }: Props) {
             </Segment>
             <Segment>
                 <span>
-                    <Icon name='clock'/> {activity.date}
+                    <Icon name='clock'/> {format(activity.date!, 'dd MMM yyyy h:mm aa')}
                     <Icon name='marker'/> {activity.venue}
                 </span>
             </Segment>
