@@ -1,7 +1,7 @@
 using Application.Activities;
 using Application.Core;
+using Application.Infrastucture.Security;
 using Application.Interfaces;
-using Application.Interfaces.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
