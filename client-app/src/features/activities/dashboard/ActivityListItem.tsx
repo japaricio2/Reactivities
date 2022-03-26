@@ -15,18 +15,18 @@ export default function ActivityListItem({ activity }: Props) {
 
         <Segment.Group>
             <Segment>
-                {activity.isCancelled && 
+                {activity.isCancelled &&
                     <Label attached='top' color='red'
                         content='Cancelled'
-                        style={{textAlign: 'center'}}></Label>}
+                        style={{ textAlign: 'center' }}></Label>}
                 <Item.Group>
                     <Item>
-                        <Item.Image style={{ marginBottom: 6 }} size='tiny' circular src='/assets/user.png' />
+                        <Item.Image style={{ marginBottom: 6 }} size='tiny' circular src={activity.host?.image || '/assets/user.png'} />
                         <Item.Content>
                             <Item.Header as={Link} to={`/activities/${activity.id}`}>
                                 {activity.title}
                             </Item.Header>
-                            <Item.Description>Hosted by {activity.host?.displayName}</Item.Description>
+                            <Item.Description>Hosted by <Link to={`/profiles/${activity.hostUsername}`}>{activity.host?.displayName}</Link>  </Item.Description>
                             {
                                 activity.isHost && (
                                     <ItemDescription>
@@ -36,7 +36,7 @@ export default function ActivityListItem({ activity }: Props) {
                                     </ItemDescription>
                                 )
                             }
-                            
+
                             {
                                 activity.isGoing && !activity.isHost && (
                                     <ItemDescription>
@@ -52,17 +52,17 @@ export default function ActivityListItem({ activity }: Props) {
             </Segment>
             <Segment>
                 <span>
-                    <Icon name='clock'/> {format(activity.date!, 'dd MMM yyyy h:mm aa')}
-                    <Icon name='marker'/> {activity.venue}
+                    <Icon name='clock' /> {format(activity.date!, 'dd MMM yyyy h:mm aa')}
+                    <Icon name='marker' /> {activity.venue}
                 </span>
             </Segment>
             <Segment secondary>
-                <ActivityListItemAttendee attendees={activity.attendees!}/>
+                <ActivityListItemAttendee attendees={activity.attendees!} />
             </Segment>
             <Segment clearing>
                 <span>{activity.description}</span>
-                <Button 
-                    as={Link} 
+                <Button
+                    as={Link}
                     to={`/activities/${activity.id}`}
                     color='teal'
                     floated='right'
