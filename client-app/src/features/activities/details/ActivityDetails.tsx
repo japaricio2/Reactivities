@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 import LoadingComponents from '../../../app/layout/LoadingComponents';
 import { useStore } from '../../../app/stores/store';
-import ActivityDetaieldChat from './ActivityDetailedChat';
+import ActivityDetailedChat from './ActivityDetailedChat';
 import ActivityDetailedHeader from './ActivityDetailedHeader';
 import ActivityDetailedInfo from './ActivityDetailedInfo';
 import ActivityDetailedSidebar from './ActivityDetailedSidebar';
@@ -13,11 +13,12 @@ import ActivityDetailedSidebar from './ActivityDetailedSidebar';
 
 export default observer(function ActivityDetails() {
     const { activityStore } = useStore();
-    const { selectedActivity: activity, loadActivity, loadingInitial } = activityStore;
+    const { selectedActivity: activity, loadActivity, loadingInitial, clearSelectedActivity} = activityStore;
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
         if (id) loadActivity(id);
+        return () => clearSelectedActivity();
     }, [id, loadActivity]);
 
     if (loadingInitial || !activity) return <LoadingComponents />;
@@ -28,7 +29,7 @@ export default observer(function ActivityDetails() {
             <Grid.Column width={10}>
                 <ActivityDetailedHeader activity={ activity }/>
                 <ActivityDetailedInfo  activity={ activity }/>
-                <ActivityDetaieldChat />
+                <ActivityDetailedChat activityId={activity.id}/>
             </Grid.Column >
             <Grid.Column width={6}>
                 <ActivityDetailedSidebar activity={activity}/>
